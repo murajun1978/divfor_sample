@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Back', blogs_path %>
+
+<p>
+  <strong>Title:</strong>
+  <%= @blog.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @blog.body %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <% @blog.comments.each do |blog_comment| %>
+    <%= div_for blog_comment do %>
+      <%= simple_format(blog_comment.comment) %>
+    <% end %>
+  <% end %>
+</p>
+
+<%= form_tag comment_blog_path do %>
+  <div>
+    <%= text_area_tag 'blog_comment[comment]', '', size: "40x20" %>
+  </div>
+  <%= submit_tag 'comment' %>
+<% end %>
+
